@@ -3,4 +3,5 @@ from api import views
 
 urlpatterns = [
     path('items/', views.item_list),
+    path('auctions/', views.auction_list),
 ]
