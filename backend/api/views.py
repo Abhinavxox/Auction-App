@@ -1,15 +1,35 @@
 from rest_framework.decorators import api_view
 from rest_framework import status
-from rest_framework.response import Response
 from django.http import JsonResponse
+from rest_framework.response import Response
 from .models import Item, Auction , User, Bid
 from .serializers import ItemSerializer, AuctionSerializer, UserSerializer, BidSerializer
 import jwt
 import datetime
 from rest_framework.exceptions import AuthenticationFailed
 
+### decorators.py
+from functools import wraps
+
+def authenticated(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        token = request.COOKIES.get('jwt')
+
+        storedToken = request.session.get('storage')
+
+        if str(token) != str(storedToken):
+            return JsonResponse({'error': 'Unauthenticated'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        # Call the original view function
+        return view_func(request, *args, **kwargs)
+
+    return _wrapped_view
+
+
 
 @api_view(['GET', 'POST'])
+@authenticated
 def item_list(request):
     if request.method == 'GET':
         items = Item.objects.all()
@@ -25,6 +45,7 @@ def item_list(request):
     
 
 @api_view(['GET', 'POST'])
+@authenticated
 def auction_list(request):
     if request.method == 'GET':
         auctions = Auction.objects.all()
@@ -40,6 +61,7 @@ def auction_list(request):
     
     
 @api_view(['GET', 'PUT', 'DELETE'])
+@authenticated
 def auction_details(request, pk):
     try:
         auction = Auction.objects.get(pk=pk)
@@ -62,6 +84,7 @@ def auction_details(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET', 'POST'])
+@authenticated
 def users_list(request):
     if request.method == 'GET':
         users = User.objects.all()
@@ -69,6 +92,7 @@ def users_list(request):
         return Response(serializer.data)
     
 @api_view(['GET', 'PUT', 'DELETE'])
+@authenticated
 def user_details(request, pk):
     try:
         user = User.objects.get(pk=pk)
@@ -92,6 +116,7 @@ def user_details(request, pk):
     
 
 @api_view(['GET', 'POST', 'DELETE'])
+@authenticated
 def bid_list(request):
     if request.method == 'GET':
         bids = Bid.objects.all()
@@ -116,7 +141,6 @@ def login(request):
         email = request.data['email']
         password = request.data['password']
 
-        #find user using email
         user = User.objects.filter(email=email).first()
 
         if user is None:
@@ -134,14 +158,12 @@ def login(request):
         }
 
         token = jwt.encode(payload, 'secret', algorithm='HS256')
-        # token.decode('utf-8')
-        #we set token via cookies
-        
 
         response = Response() 
 
         response.set_cookie(key='jwt', value=token, httponly=True)  #httonly - frontend can't access cookie, only for backend
-
+        request.session['storage'] = str(token)
+        request.session.save()
         response.data = {
             'jwt token': token
         }
@@ -154,11 +176,12 @@ def login(request):
 def register(request):
     if request.method == 'POST':
         serializer = UserSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)   #if anything not valid, raise exception
+        serializer.is_valid(raise_exception=True)   
         serializer.save()
         return Response(serializer.data)
     
 @api_view(['POST'])
+# @authenticated
 def logout (request):
     response = Response()
     response.delete_cookie('jwt')
