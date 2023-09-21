@@ -10,7 +10,6 @@ from rest_framework.exceptions import AuthenticationFailed
 from .decorators import authenticated
 
 @api_view(['GET', 'POST'])
-@authenticated
 def item_list(request):
     if request.method == 'GET':
         items = Item.objects.all()
@@ -26,7 +25,6 @@ def item_list(request):
     
 
 @api_view(['GET', 'POST'])
-@authenticated
 def auction_list(request):
     if request.method == 'GET':
         auctions = Auction.objects.all()
@@ -42,7 +40,6 @@ def auction_list(request):
     
     
 @api_view(['GET', 'PUT', 'DELETE'])
-@authenticated
 def auction_details(request, pk):
     try:
         auction = Auction.objects.get(pk=pk)
@@ -65,7 +62,6 @@ def auction_details(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET', 'POST'])
-@authenticated
 def users_list(request):
     if request.method == 'GET':
         users = User.objects.all()
@@ -73,7 +69,6 @@ def users_list(request):
         return Response(serializer.data)
     
 @api_view(['GET', 'PUT', 'DELETE'])
-@authenticated
 def user_details(request, pk):
     try:
         user = User.objects.get(pk=pk)
@@ -97,7 +92,6 @@ def user_details(request, pk):
     
 
 @api_view(['GET', 'POST', 'DELETE'])
-@authenticated
 def bid_list(request):
     if request.method == 'GET':
         bids = Bid.objects.all()
@@ -162,7 +156,6 @@ def register(request):
         return Response(serializer.data)
     
 @api_view(['POST'])
-# @authenticated
 def logout (request):
     response = Response()
     response.delete_cookie('jwt')
