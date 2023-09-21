@@ -1,6 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
+from django.http import JsonResponse
 from .models import Item, Auction , User, Bid
 from .serializers import ItemSerializer, AuctionSerializer, UserSerializer, BidSerializer
 
@@ -111,3 +112,20 @@ def bid_list(request):
         bids = Bid.objects.all()
         bids.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+@api_view(['POST'])
+def login(request):
+    if request.method == 'POST':
+        username = request.data.get('username')
+        password = request.data.get('password')
+        #validate user and password
+        try:
+            user = User.objects.get(username=username)
+            if user.password == password:
+                return JsonResponse({'message': "Login successful"}, status=status.HTTP_200_OK)
+            else:
+                return JsonResponse({'message': "Password incorrect"}, status=status.HTTP_401_UNAUTHORIZED)
+        except User.DoesNotExist:
+            return JsonResponse({'message': "User does not exist"}, status=status.HTTP_404_NOT_FOUND)
+        
+        
