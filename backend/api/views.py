@@ -63,13 +63,6 @@ def users_list(request):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
-
-    elif request.method == 'POST':
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 @api_view(['GET', 'PUT', 'DELETE'])
 def user_details(request, pk):
@@ -129,3 +122,16 @@ def login(request):
             return JsonResponse({'message': "User does not exist"}, status=status.HTTP_404_NOT_FOUND)
         
         
+@api_view(['POST'])
+def register(request):
+    if request.method == 'POST':
+        username = request.data.get('username')
+        email = request.data.get('email')
+        password = request.data.get('password')
+        try:
+            user = User.objects.get(username=username)
+            return JsonResponse({'message': "Username already exists"}, status=status.HTTP_409_CONFLICT)
+        except User.DoesNotExist:
+            user = User(username=username, email=email, password=password)
+            user.save()
+            return JsonResponse({'message': "User created successfully"}, status=status.HTTP_201_CREATED)

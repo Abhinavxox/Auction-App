@@ -8,4 +8,5 @@ urlpatterns = [
     path('bids/', views.bid_list),
     path('auctions/<int:pk>/', views.auction_details),
     path('login/', views.login),
+    path('register/', views.register),
 ]
