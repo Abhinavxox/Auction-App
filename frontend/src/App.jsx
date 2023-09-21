@@ -8,6 +8,9 @@ function App() {
     <div>
       <Navbar />
       {/* body page starts here */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </div>
   );
 }
