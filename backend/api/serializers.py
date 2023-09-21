@@ -1,5 +1,10 @@
 from rest_framework import serializers
 from .models import Item, Auction, Bid, User
+import json
+
+class DecimalSerializer(serializers.DecimalField):
+    def to_representation(self, obj):
+        return str(obj)
 
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
@@ -49,24 +54,30 @@ class BidSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        auction_id = validated_data.get('auction').id
+        auction = validated_data.get('auction')
         bid_amount = validated_data.get('bid_amount')
-        print(auction_id)
-        print(bid_amount)
+
         try:
-            auction = Auction.objects.get(id=auction_id)
+            auction = Auction.objects.get(id=auction.id)
+
+            if bid_amount <= auction.highest_bid:
+                raise serializers.ValidationError("Bid amount must be higher than the current highest bid.")
+
+            existing_bids = json.loads(auction.bids) if auction.bids else []
+            print(validated_data.get('bid_time'))
+            new_bid = {
+                'bid_amount': float(bid_amount),
+                'user': validated_data.get('user').username
+            }
+            existing_bids.append(new_bid)
+            new_bids_json = json.dumps(existing_bids)
+            auction.bids = new_bids_json
+            auction.highest_bid = bid_amount
+            auction.save()
+
+            return Bid.objects.create(**validated_data)
         except Auction.DoesNotExist:
             raise serializers.ValidationError("Auction does not exist.")
-
-        if bid_amount <= auction.highest_bid:
-            raise serializers.ValidationError("Bid amount must be higher than the current highest bid.")
-
-        auction.highest_bid = bid_amount
-        auction.save()
-
-        return Bid.objects.create(**validated_data)
-
-    
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
