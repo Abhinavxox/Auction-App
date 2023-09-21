@@ -19,6 +19,7 @@ class Auction(models.Model):
     lot_number = models.IntegerField()
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     user_id = models.ForeignKey('User', on_delete=models.CASCADE)
+    highest_bid = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
     def __str__(self):
         return self.title

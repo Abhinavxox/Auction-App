@@ -93,7 +93,7 @@ def user_details(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
     
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'DELETE'])
 def bid_list(request):
     if request.method == 'GET':
         bids = Bid.objects.all()
@@ -107,3 +107,7 @@ def bid_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+    elif request.method == 'DELETE':
+        bids = Bid.objects.all()
+        bids.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

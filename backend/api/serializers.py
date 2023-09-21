@@ -27,6 +27,7 @@ class AuctionSerializer(serializers.ModelSerializer):
         instance.auction_date = validated_data.get('auction_date', instance.auction_date)
         instance.auction_period = validated_data.get('auction_period', instance.auction_period)
         instance.lot_number = validated_data.get('lot_number', instance.lot_number)
+        instance.highest_bid = validated_data.get('highest_bid', instance.highest_bid)
         instance.item = item_instance
         instance.save()
         item_instance.item_id = item_data.get('item_id', item_instance.item_id)
@@ -46,6 +47,26 @@ class BidSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bid
         fields = '__all__'
+
+    def create(self, validated_data):
+        auction_id = validated_data.get('auction').id
+        bid_amount = validated_data.get('bid_amount')
+        print(auction_id)
+        print(bid_amount)
+        try:
+            auction = Auction.objects.get(id=auction_id)
+        except Auction.DoesNotExist:
+            raise serializers.ValidationError("Auction does not exist.")
+
+        if bid_amount <= auction.highest_bid:
+            raise serializers.ValidationError("Bid amount must be higher than the current highest bid.")
+
+        auction.highest_bid = bid_amount
+        auction.save()
+
+        return Bid.objects.create(**validated_data)
+
+    
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
