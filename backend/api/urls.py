@@ -9,4 +9,5 @@ urlpatterns = [
     path('auctions/<int:pk>/', views.auction_details),
     path('login/', views.login),
     path('register/', views.register),
+    path('logout/', views.logout),
 ]
