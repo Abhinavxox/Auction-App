@@ -7,26 +7,7 @@ from .serializers import ItemSerializer, AuctionSerializer, UserSerializer, BidS
 import jwt
 import datetime
 from rest_framework.exceptions import AuthenticationFailed
-
-### decorators.py
-from functools import wraps
-
-def authenticated(view_func):
-    @wraps(view_func)
-    def _wrapped_view(request, *args, **kwargs):
-        token = request.COOKIES.get('jwt')
-
-        storedToken = request.session.get('storage')
-
-        if str(token) != str(storedToken):
-            return JsonResponse({'error': 'Unauthenticated'}, status=status.HTTP_401_UNAUTHORIZED)
-
-        # Call the original view function
-        return view_func(request, *args, **kwargs)
-
-    return _wrapped_view
-
-
+from .decorators import authenticated
 
 @api_view(['GET', 'POST'])
 @authenticated
