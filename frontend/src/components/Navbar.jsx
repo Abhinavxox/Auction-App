@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -7,34 +8,29 @@ const Navbar = () => {
       <div className="container mx-auto relative">
         <div className="py-4 mx-4 md:mx-6">
           <div className="flex items-center justify-between border-b border-gray-200 :border-gray-700 py-4">
-            <div>
-              <h1 className="text-xl font-bold uppercase">Fotheby's</h1>
-            </div>
+            <Link to="/">
+              <div>
+                <h1 className="text-xl font-bold uppercase">Fotheby's</h1>
+              </div>
+            </Link>
             <div className="hidden md:block">
               <ul className="flex items-center space-x-6">
                 <li>
-                  <a
-                    href="javascript:void(0)"
+                  <Link
+                    to="/auctions"
                     className=":text-white :hover:text-gray-300 text-base text-right text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
                   >
-                    {" "}
                     Auctions{" "}
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="javascript:void(0)"
-                    className=":text-white :hover:text-gray-300 text-base text-right text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
-                  >
+                  <a className=":text-white :hover:text-gray-300 text-base text-right text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
                     {" "}
-                    Your Auctions{" "}
+                    Create Bid{" "}
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="javascript:void(0)"
-                    className=":text-white :hover:text-gray-300 text-base text-right text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
-                  >
+                  <a className=":text-white :hover:text-gray-300 text-base text-right text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
                     {" "}
                     Your Bids{" "}
                   </a>
@@ -44,7 +40,6 @@ const Navbar = () => {
             <div className="hidden md:flex items-center space-x-4">
               <a
                 aria-label="my account"
-                href="javascript:void(0)"
                 className="focus:outline-none focus:ring-2 focus:ring-gray-800 hover:bg-gray-100 p-0.5 rounded"
               >
                 <svg
@@ -120,7 +115,9 @@ const Navbar = () => {
         >
           <div className="w-full">
             <div className="flex items-center justify-between border-b border-gray-200 :border-gray-700 pb-3 mx-4">
-              <h1 className="text-lg font-bold uppercase">FOTHEBY'S</h1>
+              <Link to="/">
+                <h1 className="text-lg font-bold uppercase">FOTHEBY'S</h1>
+              </Link>
               <button
                 aria-label="close menu"
                 onClick={() => setShowMenu(false)}
@@ -153,13 +150,13 @@ const Navbar = () => {
           <div className="mt-4 mx-4">
             <ul className="flex flex-col space-y-4">
               <li className="border-b border-gray-200 :border-gray-700 :text-gray-700 pb-4 px-1 flex items-center justify-between">
-                <a
-                  href="javascript:void(0)"
+                <Link
+                  to="/auctions"
                   className=":text-white focus:outline-none focus:ring-2 focus:ring-gray-800 text-base text-gray-800 hover:underline"
                 >
                   {" "}
                   Auctions{" "}
-                </a>
+                </Link>
                 <button
                   aria-label="Add"
                   className=":text-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 rounded hover:bg-gray-100 :hover:bg-gray-700"
@@ -188,12 +185,9 @@ const Navbar = () => {
                 </button>
               </li>
               <li className="border-b border-gray-200 :border-gray-700 :text-gray-700 pb-4 px-1 flex items-center justify-between">
-                <a
-                  href="javascript:void(0)"
-                  className=":text-white focus:outline-none focus:ring-2 focus:ring-gray-800 text-base text-gray-800 hover:underline"
-                >
+                <a className=":text-white focus:outline-none focus:ring-2 focus:ring-gray-800 text-base text-gray-800 hover:underline">
                   {" "}
-                  Your Auctions{" "}
+                  Create Bid{" "}
                 </a>
                 <button
                   aria-label="Add"
@@ -223,10 +217,7 @@ const Navbar = () => {
                 </button>
               </li>
               <li className="border-b border-gray-200 :border-gray-700 :text-gray-700 pb-4 px-1 flex items-center justify-between">
-                <a
-                  href="javascript:void(0)"
-                  className=":text-white focus:outline-none focus:ring-2 focus:ring-gray-800 text-base text-gray-800 hover:underline"
-                >
+                <a className=":text-white focus:outline-none focus:ring-2 focus:ring-gray-800 text-base text-gray-800 hover:underline">
                   {" "}
                   Your Bids{" "}
                 </a>
@@ -262,10 +253,7 @@ const Navbar = () => {
           <div className="w-full h-full flex items-end">
             <ul className="bg-gray-50 :bg-gray-800 py-10 px-4 flex flex-col space-y-8 w-full">
               <li>
-                <a
-                  className="flex items-center space-x-2 focus:outline-none text-gray-800 :text-white focus:ring-2 focus:ring-gray-800 hover:underline"
-                  href="javascript:void(0)"
-                >
+                <a className="flex items-center space-x-2 focus:outline-none text-gray-800 :text-white focus:ring-2 focus:ring-gray-800 hover:underline">
                   <div>
                     <svg
                       className="fill-stroke"

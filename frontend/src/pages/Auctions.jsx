@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Auctions = () => {
   const data = [
@@ -50,14 +51,12 @@ const Auctions = () => {
         "https://assets.wfcdn.com/im/10447719/resize-h755-w755%5Ecompr-r85/2427/242773375/English+Chippendale+Side+Chair.jpg",
     },
   ];
-
   return (
     <div>
       <section class="text-gray-600 body-font">
         <div class="container px-5 py-24 mx-auto">
           <div className="w-full flex justify-between text-2xl uppercase font-bold mb-16">
-            <p>OUR PREVIOUS SALES</p>
-            <p>View ALL</p>
+            <p>CURRENT AUCTIONS</p>
           </div>
           <div class="flex flex-wrap -m-4">
             {data.map((item) => (
@@ -69,17 +68,21 @@ const Auctions = () => {
                     src={item.image}
                   />
                 </a>
-                <div class="mt-4 relative h-[12vh]">
+                <div class="mt-4 relative h-[16vh]">
                   <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">
                     CATEGORY
                   </h3>
                   <h2 class="text-gray-900 title-font text-lg font-medium">
                     {item.name}
                   </h2>
-                  <p class="mt-1 flex justify-between absolute bottom-0 w-full">
-                    <p>{item.price}</p>
-                    <div> SOLD</div>
-                  </p>
+                  <div class="mt-1 flex justify-between absolute bottom-0 w-full">
+                    <Link
+                      className="border-2 p-3 w-full text-center rounded-xl hover:bg-gray-700 hover:text-white transition duration-300 ease-in-out"
+                      to="/auction"
+                    >
+                      BID
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
