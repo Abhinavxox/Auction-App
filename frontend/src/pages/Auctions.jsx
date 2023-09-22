@@ -57,6 +57,22 @@ const Auctions = () => {
         <div class="container px-5 py-24 mx-auto">
           <div className="w-full flex justify-between text-2xl uppercase font-bold mb-16">
             <p>CURRENT AUCTIONS</p>
+            <div className="ml-2 mb-6">
+              {/* item category */}
+              <select
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option disabled selected>
+                  Category ALL
+                </option>
+                <option>Painting</option>
+                <option>Sculpture</option>
+                <option>Photographic Image</option>
+                <option>Carving</option>
+                <option>Drawing</option>
+              </select>
+            </div>
           </div>
           <div class="flex flex-wrap -m-4">
             {data.map((item) => (
@@ -78,7 +94,7 @@ const Auctions = () => {
                   <div class="mt-1 flex justify-between absolute bottom-0 w-full">
                     <Link
                       className="border-2 p-3 w-full text-center rounded-xl hover:bg-gray-700 hover:text-white transition duration-300 ease-in-out"
-                      to="/auction"
+                      to="/auction/1"
                     >
                       BID
                     </Link>

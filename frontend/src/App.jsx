@@ -4,6 +4,9 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Auctions from "./pages/Auctions";
 import CreateAuction from "./pages/CreateAuction";
+import Auction from "./pages/Auction";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -14,6 +17,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/auctions" element={<Auctions />} />
         <Route path="/createAuction" element={<CreateAuction />} />
+        <Route path="/auction/:id" element={<Auction />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );

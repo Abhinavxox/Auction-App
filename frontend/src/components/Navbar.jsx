@@ -41,7 +41,8 @@ const Navbar = () => {
               </ul>
             </div>
             <div className="hidden md:flex items-center space-x-4">
-              <a
+              <Link
+                to="/login"
                 aria-label="my account"
                 className="focus:outline-none focus:ring-2 focus:ring-gray-800 hover:bg-gray-100 p-0.5 rounded"
               >
@@ -68,7 +69,7 @@ const Navbar = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
             <div className="md:hidden">
               <button
