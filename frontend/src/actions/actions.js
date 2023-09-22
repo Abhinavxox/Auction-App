@@ -116,11 +116,11 @@ export const newAuction = (auctionData) => async (dispatch) => {
 
     const config = {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       },
     };
     const { data } = await axios.post(
-      `${BackendUrl}/admin/auctions/`,
+      `${BackendUrl}/auctions/`,
       auctionData,
       config
     );

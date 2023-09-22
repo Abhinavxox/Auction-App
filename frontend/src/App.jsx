@@ -8,7 +8,10 @@ import Auction from "./pages/Auction";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
+import { useSelector } from "react-redux";
+
 function App() {
+  const { user, isAuthenticated } = useSelector((state) => state.user);
   return (
     <div>
       <Navbar />
@@ -16,7 +19,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auctions" element={<Auctions />} />
-        <Route path="/createAuction" element={<CreateAuction />} />
+        <Route
+          path="/createAuction"
+          element={isAuthenticated ? <CreateAuction /> : <Login />}
+        />
         <Route path="/auction/:id" element={<Auction />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

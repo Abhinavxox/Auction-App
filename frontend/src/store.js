@@ -8,11 +8,17 @@ import thunk from "redux-thunk";
 //for redux devtools
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import { UserReducer } from "./reducers/reducers";
+import {
+  UserReducer,
+  AuctionDetailsReducer,
+  AuctionReducer,
+} from "./reducers/reducers";
 
 //multiple reducers
 const reducer = combineReducers({
   user: UserReducer,
+  auctions: AuctionReducer,
+  auctionDetails: AuctionDetailsReducer,
 });
 
 let initialState = {};

@@ -20,7 +20,7 @@ class AuctionSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         item_data = validated_data.pop('item')
-        item_instance = Item.objects.create(**item_data)  
+        item_instance = Item.objects.create(**item_data)
         auction_instance = Auction.objects.create(item=item_instance, **validated_data)  
         return auction_instance
 

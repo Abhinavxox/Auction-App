@@ -88,52 +88,29 @@ export const AuctionReducer = (state = { auctions: [] }, action) => {
 export const AuctionDetailsReducer = (state = { auction: {} }, action) => {
   switch (action.type) {
     case AUCTION_DETAILS_REQUEST:
-      return {
-        ...state,
-        loading: true,
-      };
-    case AUCTION_DETAILS_SUCCESS:
-      return {
-        loading: false,
-        auction: action.payload,
-      };
-    case AUCTION_DETAILS_FAIL:
-      return {
-        ...state,
-        error: action.payload,
-      };
-    case CLEAR_ERRORS:
-      return {
-        ...state,
-        error: null,
-      };
-    default:
-      return state;
-  }
-};
-
-export const NewAuctionReducer = (state = { auction: {} }, action) => {
-  switch (action.type) {
     case NEW_AUCTION_REQUEST:
       return {
         ...state,
         loading: true,
+        isPosted: false,
       };
+    case AUCTION_DETAILS_SUCCESS:
     case NEW_AUCTION_SUCCESS:
       return {
         loading: false,
+        isPosted: true,
         auction: action.payload,
-        success: action.payload.success,
       };
+    case AUCTION_DETAILS_FAIL:
     case NEW_AUCTION_FAIL:
       return {
         ...state,
-        error: action.payload,
+        errorAuction: action.payload,
       };
     case CLEAR_ERRORS:
       return {
         ...state,
-        error: null,
+        errorAuction: null,
       };
     default:
       return state;
