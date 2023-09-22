@@ -69,7 +69,6 @@ const Auctions = () => {
                     </h2>
                     <div className="mt-1 flex justify-between absolute bottom-0 w-full">
                       <Link
-                        state={item}
                         className="border-2 p-3 w-full text-center rounded-xl hover:bg-gray-700 hover:text-white transition duration-300 ease-in-out"
                         to={`/auction/${item.id}/`}
                       >

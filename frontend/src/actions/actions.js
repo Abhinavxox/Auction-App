@@ -16,7 +16,6 @@ import {
   NEW_AUCTION_FAIL,
   NEW_BID_REQUEST,
   NEW_BID_SUCCESS,
-  NEW_BID_RESET,
   ALL_BIDS_REQUEST,
   ALL_BIDS_SUCCESS,
   ALL_BIDS_FAIL,
@@ -43,7 +42,6 @@ export const login = (email, password) => async (dispatch) => {
       },
       config
     );
-    console.log(data);
 
     dispatch({ type: LOGIN_SUCCESS, payload: data });
   } catch (error) {
@@ -98,9 +96,9 @@ export const getAuctionDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: AUCTION_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`${BackendUrl}/auction/${id}/`);
+    const { data } = await axios.get(`${BackendUrl}/auctions/${id}`);
 
-    dispatch({ type: AUCTION_DETAILS_SUCCESS, payload: data.auction });
+    dispatch({ type: AUCTION_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
       type: AUCTION_DETAILS_FAIL,
@@ -143,9 +141,8 @@ export const newBid = (bidData) => async (dispatch) => {
     };
     const { data } = await axios.post(`${BackendUrl}/bids/`, bidData, config);
 
-    dispatch({ type: NEW_BID_SUCCESS, payload: data.success });
+    dispatch({ type: NEW_BID_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: NEW_BID_RESET });
     dispatch({ type: NEW_AUCTION_FAIL, payload: error.response.data.message });
   }
 };

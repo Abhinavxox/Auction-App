@@ -16,7 +16,6 @@ import {
   NEW_AUCTION_FAIL,
   NEW_BID_REQUEST,
   NEW_BID_SUCCESS,
-  NEW_BID_RESET,
   ALL_BIDS_REQUEST,
   ALL_BIDS_SUCCESS,
   ALL_BIDS_FAIL,
@@ -122,27 +121,22 @@ export const NewBidReducer = (state = { bid: {} }, action) => {
     case NEW_BID_REQUEST:
       return {
         ...state,
-        loading: true,
+        loadingBid: true,
       };
     case NEW_BID_SUCCESS:
       return {
-        loading: false,
-        success: action.payload,
-      };
-    case NEW_BID_RESET:
-      return {
-        ...state,
-        success: false,
+        loadingBId: false,
+        successBId: action.payload,
       };
     case NEW_AUCTION_FAIL:
       return {
         ...state,
-        error: action.payload,
+        errorBid: action.payload,
       };
     case CLEAR_ERRORS:
       return {
         ...state,
-        error: null,
+        errorBid: null,
       };
     default:
       return state;

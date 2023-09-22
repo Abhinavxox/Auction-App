@@ -18,12 +18,18 @@ function App() {
       {/* body page starts here */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/auctions" element={<Auctions />} />
+        <Route
+          path="/auctions"
+          element={isAuthenticated ? <Auctions /> : <Login />}
+        />
         <Route
           path="/createAuction"
           element={isAuthenticated ? <CreateAuction /> : <Login />}
         />
-        <Route path="/auction/:id" element={<Auction />} />
+        <Route
+          path="/auction/:id"
+          element={isAuthenticated ? <Auction /> : <Login />}
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
