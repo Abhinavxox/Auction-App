@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { options } from ".././alert/Alert";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const { user, loading, isAuthenticated, error } = useSelector(
+    (state) => state.user
+  );
   return (
     <div className=":bg-gray-900">
       <div className="container mx-auto relative">
@@ -41,35 +49,39 @@ const Navbar = () => {
               </ul>
             </div>
             <div className="hidden md:flex items-center space-x-4">
-              <Link
-                to="/login"
-                aria-label="my account"
-                className="focus:outline-none focus:ring-2 focus:ring-gray-800 hover:bg-gray-100 p-0.5 rounded"
-              >
-                <svg
-                  className="fill-stroke text-gray-800 :text-white"
-                  width={18}
-                  height={20}
-                  viewBox="0 0 18 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+              {isAuthenticated ? (
+                <>{user.name}</>
+              ) : (
+                <Link
+                  to="/login"
+                  aria-label="my account"
+                  className="focus:outline-none focus:ring-2 focus:ring-gray-800 hover:bg-gray-100 p-0.5 rounded"
                 >
-                  <path
-                    d="M17 19V17C17 15.9391 16.5786 14.9217 15.8284 14.1716C15.0783 13.4214 14.0609 13 13 13H5C3.93913 13 2.92172 13.4214 2.17157 14.1716C1.42143 14.9217 1 15.9391 1 17V19"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M9 9C11.2091 9 13 7.20914 13 5C13 2.79086 11.2091 1 9 1C6.79086 1 5 2.79086 5 5C5 7.20914 6.79086 9 9 9Z"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Link>
+                  <svg
+                    className="fill-stroke text-gray-800 :text-white"
+                    width={18}
+                    height={20}
+                    viewBox="0 0 18 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M17 19V17C17 15.9391 16.5786 14.9217 15.8284 14.1716C15.0783 13.4214 14.0609 13 13 13H5C3.93913 13 2.92172 13.4214 2.17157 14.1716C1.42143 14.9217 1 15.9391 1 17V19"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M9 9C11.2091 9 13 7.20914 13 5C13 2.79086 11.2091 1 9 1C6.79086 1 5 2.79086 5 5C5 7.20914 6.79086 9 9 9Z"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </Link>
+              )}
             </div>
             <div className="md:hidden">
               <button

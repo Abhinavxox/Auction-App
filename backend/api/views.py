@@ -142,6 +142,9 @@ def login(request):
         request.session['storage'] = str(token)
         request.session.save()
         response.data = {
+            "id": user.id,
+            "email": user.email,
+            "name": user.name,
             'jwt token': token
         }
 

@@ -8,10 +8,12 @@ import thunk from "redux-thunk";
 //for redux devtools
 import { composeWithDevTools } from "redux-devtools-extension";
 
-//   import { storiesReducer, questionReducer } from "./reducers/storyReducer";
+import { UserReducer } from "./reducers/reducers";
 
 //multiple reducers
-const reducer = combineReducers({});
+const reducer = combineReducers({
+  user: UserReducer,
+});
 
 let initialState = {};
 

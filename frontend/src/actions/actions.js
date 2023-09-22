@@ -24,24 +24,28 @@ import {
 } from "../constants/constants.js";
 
 const BackendUrl = "http://localhost:8000/api";
+import axios from "axios";
 
 //login
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: LOGIN_REQUEST });
-
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
     };
     const { data } = await axios.post(
-      `${BackendUrl}/login`,
-      { email: email, password: password },
+      `${BackendUrl}/login/`,
+      {
+        email,
+        password,
+      },
       config
     );
+    console.log(data);
 
-    dispatch({ type: LOGIN_SUCCESS, payload: data.user });
+    dispatch({ type: LOGIN_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
   }
