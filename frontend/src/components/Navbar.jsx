@@ -41,10 +41,13 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <a className=":text-white :hover:text-gray-300 text-base text-right text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+                  <Link
+                    to="/myAuctions"
+                    className=":text-white :hover:text-gray-300 text-base text-right text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
+                  >
                     {" "}
-                    Your Bids{" "}
-                  </a>
+                    Your Auctions{" "}
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -236,10 +239,13 @@ const Navbar = () => {
                 </button>
               </li>
               <li className="border-b border-gray-200 :border-gray-700 :text-gray-700 pb-4 px-1 flex items-center justify-between">
-                <a className=":text-white focus:outline-none focus:ring-2 focus:ring-gray-800 text-base text-gray-800 hover:underline">
+                <Link
+                  to="/myAuctions"
+                  className=":text-white focus:outline-none focus:ring-2 focus:ring-gray-800 text-base text-gray-800 hover:underline"
+                >
                   {" "}
-                  Your Bids{" "}
-                </a>
+                  Your Auctions{" "}
+                </Link>
                 <button
                   aria-label="Add"
                   className=":text-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 rounded hover:bg-gray-100 :hover:bg-gray-700"

@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 import { useSelector } from "react-redux";
+import MyAuctions from "./pages/MyAuctions";
 
 function App() {
   const { user, isAuthenticated } = useSelector((state) => state.user);
@@ -29,6 +30,10 @@ function App() {
         <Route
           path="/auction/:id"
           element={isAuthenticated ? <Auction /> : <Login />}
+        />
+        <Route
+          path="/myAuctions"
+          element={isAuthenticated ? <MyAuctions /> : <Login />}
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

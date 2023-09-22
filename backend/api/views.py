@@ -177,3 +177,11 @@ def logout (request):
     }
 
     return response
+
+@api_view(['POST'])
+def my_auctions (request):
+    if request.method == 'POST':
+        user_id = request.data['user_id']
+        auctions = Auction.objects.filter(user_id=user_id)
+        serializer = AuctionSerializer(auctions, many=True)
+        return Response(serializer.data)
