@@ -99,6 +99,8 @@ def bid_list(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
+        if request.data.get('bid_amount') <= Auction.objects.get(id=request.data.get('auction')).highest_bid:
+            return JsonResponse({'message': 'Bid amount must be higher than current highest bid.'}, status=status.HTTP_400_BAD_REQUEST)
         serializer = BidSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

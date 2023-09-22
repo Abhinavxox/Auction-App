@@ -60,9 +60,6 @@ class BidSerializer(serializers.ModelSerializer):
         try:
             auction = Auction.objects.get(id=auction.id)
 
-            if bid_amount <= auction.highest_bid:
-                raise serializers.ValidationError("Bid amount must be higher than the current highest bid.")
-
             existing_bids = json.loads(auction.bids) if auction.bids else []
             print(validated_data.get('bid_time'))
             new_bid = {
