@@ -51,33 +51,63 @@ const Auctions = () => {
               </div>
             </div>
             <div className="flex flex-wrap -m-4">
-              {data.map((item) => (
-                <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-                  <a className="block relative h-48 rounded overflow-hidden">
-                    <img
-                      alt="ecommerce"
-                      className="object-cover object-center w-full h-full block"
-                      src={item.item.image}
-                    />
-                  </a>
-                  <div className="mt-4 relative h-[16vh]">
-                    <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-                      {item.item.category}
-                    </h3>
-                    <h2 className="text-gray-900 title-font text-lg font-medium">
-                      {item.title}
-                    </h2>
-                    <div className="mt-1 flex justify-between absolute bottom-0 w-full">
-                      <Link
-                        className="border-2 p-3 w-full text-center rounded-xl hover:bg-gray-700 hover:text-white transition duration-300 ease-in-out"
-                        to={`/auction/${item.id}/`}
-                      >
-                        BID
-                      </Link>
+              {data.map((item) =>
+                item.ended ? (
+                  <>
+                    <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
+                      <a className="block relative h-48 rounded overflow-hidden">
+                        <img
+                          alt="ecommerce"
+                          className="object-cover object-center w-full h-full block"
+                          src={item.item.image}
+                        />
+                      </a>
+                      <div className="mt-4 relative h-[16vh]">
+                        <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+                          {item.item.category}
+                        </h3>
+                        <h2 className="text-gray-900 title-font text-lg font-medium">
+                          {item.title}
+                        </h2>
+                        <div className="mt-1 flex justify-between absolute bottom-0 w-full">
+                          <a
+                            className="border-2 p-3 w-full text-center rounded-xl bg-gray-700 text-white transition duration-300 ease-in-out"
+                            to={`/auction/${item.id}/`}
+                          >
+                            SOLD at {item.highest_bid}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
+                    <a className="block relative h-48 rounded overflow-hidden">
+                      <img
+                        alt="ecommerce"
+                        className="object-cover object-center w-full h-full block"
+                        src={item.item.image}
+                      />
+                    </a>
+                    <div className="mt-4 relative h-[16vh]">
+                      <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+                        {item.item.category}
+                      </h3>
+                      <h2 className="text-gray-900 title-font text-lg font-medium">
+                        {item.title}
+                      </h2>
+                      <div className="mt-1 flex justify-between absolute bottom-0 w-full">
+                        <Link
+                          className="border-2 p-3 w-full text-center rounded-xl hover:bg-gray-700 hover:text-white transition duration-300 ease-in-out"
+                          to={`/auction/${item.id}/`}
+                        >
+                          BID
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                )
+              )}
             </div>
           </div>
         </section>

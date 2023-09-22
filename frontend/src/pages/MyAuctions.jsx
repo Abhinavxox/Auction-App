@@ -46,38 +46,70 @@ const MyAuctions = () => {
               <p>MY AUCTIONS</p>
             </div>
             <div className="flex flex-wrap -m-4">
-              {data.map((item) => (
-                <div className="lg:w-1/4 md:w-1/2 p-4 w-full" key={item.id}>
-                  <Link
-                    to={`/auctions/${item.id}`} // Replace with your auction details route
-                    className="block relative h-48 rounded overflow-hidden"
-                  >
-                    <img
-                      alt="ecommerce"
-                      className="object-cover object-center w-full h-full block"
-                      src={item.item.image}
-                    />
-                  </Link>
-                  <div className="mt-4 relative h-[16vh]">
-                    <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-                      {item.item.category}
-                    </h3>
-                    <h2 className="text-gray-900 title-font text-lg font-medium">
-                      {item.title}
-                    </h2>
-                    <div className="mt-1 flex justify-between absolute bottom-0 w-full">
-                      <button
-                        className="border-2 p-3 w-full text-center rounded-xl hover:bg-gray-700 hover:text-white transition duration-300 ease-in-out"
-                        onClick={() => {
-                          handleEndAuction(item.id);
-                        }}
-                      >
-                        END AUCTION
-                      </button>
+              {data.map((item) =>
+                item.ended ? (
+                  <>
+                    <div className="lg:w-1/4 md:w-1/2 p-4 w-full" key={item.id}>
+                      <a className="block relative h-48 rounded overflow-hidden">
+                        <img
+                          alt="ecommerce"
+                          className="object-cover object-center w-full h-full block"
+                          src={item.item.image}
+                        />
+                      </a>
+                      <div className="mt-4 relative h-[16vh]">
+                        <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+                          {item.item.category}
+                        </h3>
+                        <h2 className="text-gray-900 title-font text-lg font-medium">
+                          {item.title}
+                        </h2>
+                        <div className="mt-1 flex justify-between absolute bottom-0 w-full">
+                          <button
+                            className="border-2 p-3 w-full text-center rounded-xl bg-gray-700 text-white transition duration-300 ease-in-out"
+                            onClick={() => {
+                              handleEndAuction(item.id);
+                            }}
+                          >
+                            ENDED
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="lg:w-1/4 md:w-1/2 p-4 w-full" key={item.id}>
+                    <Link
+                      to={`/auctions/${item.id}`} // Replace with your auction details route
+                      className="block relative h-48 rounded overflow-hidden"
+                    >
+                      <img
+                        alt="ecommerce"
+                        className="object-cover object-center w-full h-full block"
+                        src={item.item.image}
+                      />
+                    </Link>
+                    <div className="mt-4 relative h-[16vh]">
+                      <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+                        {item.item.category}
+                      </h3>
+                      <h2 className="text-gray-900 title-font text-lg font-medium">
+                        {item.title}
+                      </h2>
+                      <div className="mt-1 flex justify-between absolute bottom-0 w-full">
+                        <button
+                          className="border-2 p-3 w-full text-center rounded-xl hover:bg-gray-700 hover:text-white transition duration-300 ease-in-out"
+                          onClick={() => {
+                            handleEndAuction(item.id);
+                          }}
+                        >
+                          END AUCTION
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                )
+              )}
             </div>
           </div>
         </section>
