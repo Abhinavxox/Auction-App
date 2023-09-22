@@ -13,6 +13,7 @@ import {
   AuctionDetailsReducer,
   AuctionReducer,
   NewBidReducer,
+  EndAuctionReducer,
 } from "./reducers/reducers";
 
 //multiple reducers
@@ -21,6 +22,7 @@ const reducer = combineReducers({
   auctions: AuctionReducer,
   auctionDetails: AuctionDetailsReducer,
   bid: NewBidReducer,
+  endAuction: EndAuctionReducer,
 });
 
 let initialState = {};

@@ -16,9 +16,9 @@ import {
   NEW_AUCTION_FAIL,
   NEW_BID_REQUEST,
   NEW_BID_SUCCESS,
-  ALL_BIDS_REQUEST,
-  ALL_BIDS_SUCCESS,
-  ALL_BIDS_FAIL,
+  AUCTION_END_REQUEST,
+  AUCTION_END_SUCCESS,
+  AUCTION_END_FAIL,
   CLEAR_ERRORS,
 } from "../constants/constants.js";
 
@@ -137,6 +137,33 @@ export const NewBidReducer = (state = { bid: {} }, action) => {
       return {
         ...state,
         errorBid: null,
+      };
+    default:
+      return state;
+  }
+};
+
+export const EndAuctionReducer = (state = { auction: {} }, action) => {
+  switch (action.type) {
+    case AUCTION_END_REQUEST:
+      return {
+        ...state,
+        loadingEnd: true,
+      };
+    case AUCTION_END_SUCCESS:
+      return {
+        loadingEnd: false,
+        successEnd: action.payload,
+      };
+    case AUCTION_END_FAIL:
+      return {
+        ...state,
+        errorEnd: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        errorEnd: null,
       };
     default:
       return state;

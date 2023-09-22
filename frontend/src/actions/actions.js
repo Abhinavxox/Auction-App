@@ -16,9 +16,9 @@ import {
   NEW_AUCTION_FAIL,
   NEW_BID_REQUEST,
   NEW_BID_SUCCESS,
-  ALL_BIDS_REQUEST,
-  ALL_BIDS_SUCCESS,
-  ALL_BIDS_FAIL,
+  AUCTION_END_REQUEST,
+  AUCTION_END_SUCCESS,
+  AUCTION_END_FAIL,
   CLEAR_ERRORS,
 } from "../constants/constants.js";
 
@@ -152,4 +152,21 @@ export const newBid = (bidData) => async (dispatch) => {
 //clear errors
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
+};
+
+export const endAuction = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: AUCTION_END_REQUEST });
+
+    const { data } = await axios.put(`${BackendUrl}/auctions/${id}/`, {
+      ended: true,
+    });
+
+    dispatch({ type: AUCTION_END_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: AUCTION_END_FAIL,
+      payload: error.response.data.message,
+    });
+  }
 };

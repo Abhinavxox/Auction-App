@@ -51,15 +51,19 @@ def auction_details(request, pk):
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = AuctionSerializer(auction, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors)
+        # Assuming your request has a JSON body with a field 'ended' containing the new value
+        new_ended = request.data.get('ended', None)
+        if new_ended is not None:
+            auction.ended = new_ended
+            auction.save()
+            return Response(status=status.HTTP_204_NO_CONTENT, data={'message': 'Auction ended successfully'})
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'The "ended" field must be provided in the request body'})
 
     elif request.method == 'DELETE':
         auction.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 @api_view(['GET', 'POST'])
 def users_list(request):
