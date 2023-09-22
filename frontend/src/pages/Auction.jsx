@@ -78,7 +78,25 @@ const Auction = () => {
                   Click here for Details
                 </div>
                 <div className="collapse-content">
-                  <p>{JSON.stringify(auction)}</p>
+                  <div className="p-4 border border-gray-300 rounded-lg shadow-md">
+                    <h2 className="text-xl font-semibold">{auction.title}</h2>
+                    <p className="text-gray-600">{`Estimated Price: $${auction.estimated_price}`}</p>
+                    <p className="text-gray-600">{`Location: ${auction.location}`}</p>
+                    <p className="text-gray-600">{`Auction Date: ${auction.auction_date} (${auction.auction_period})`}</p>
+                    <p className="text-gray-600">{`Lot Number: ${auction.lot_number}`}</p>
+                    <div className="mt-4">
+                      <h3 className="text-lg font-semibold">Item Details</h3>
+                      <p className="text-gray-600">{`Category: ${auction.item.category}`}</p>
+                      <p className="text-gray-600">{`Artist: ${auction.item.artist_name}`}</p>
+                      <p className="text-gray-600">{`Description: ${auction.item.description}`}</p>
+                      <p className="text-gray-600">{`Estimated Price: $${auction.item.estimated_price}`}</p>
+                    </div>
+                    <div className="mt-4">
+                      <h3 className="text-lg font-semibold">Current Bidding</h3>
+                      <p className="text-gray-600">{`Highest Bid: $${auction.highest_bid}`}</p>
+                      {/* Render the list of bids here if needed */}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
