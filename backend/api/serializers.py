@@ -64,7 +64,7 @@ class BidSerializer(serializers.ModelSerializer):
             print(validated_data.get('bid_time'))
             new_bid = {
                 'bid_amount': float(bid_amount),
-                'user': validated_data.get('user').username
+                'user': validated_data.get('user').name
             }
             existing_bids.append(new_bid)
             new_bids_json = json.dumps(existing_bids)

@@ -70,7 +70,6 @@ const CreateAuction = () => {
       navigate(`/`);
     }
   }, [isPosted]);
-
   return (
     <div className=" flex flex-col justify-center items-center">
       <form className="w-4/5">

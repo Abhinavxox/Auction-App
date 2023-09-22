@@ -87,7 +87,7 @@ export const getAuctions = () => async (dispatch) => {
 
     const { data } = await axios.get(`${BackendUrl}/auctions/`);
 
-    dispatch({ type: ALL_AUCTIONS_SUCCESS, payload: data.auctions });
+    dispatch({ type: ALL_AUCTIONS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: ALL_AUCTIONS_FAIL, payload: error.response.data.message });
   }
