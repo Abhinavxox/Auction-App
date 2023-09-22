@@ -62,7 +62,7 @@ export const register = (name, email, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      `${BackendUrl}/register`,
+      `${BackendUrl}/register/`,
       {
         name: name,
         email: email,
@@ -71,7 +71,7 @@ export const register = (name, email, password) => async (dispatch) => {
       config
     );
 
-    dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
+    dispatch({ type: REGISTER_USER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
       type: REGISTER_USER_FAIL,
@@ -85,7 +85,7 @@ export const getAuctions = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_AUCTIONS_REQUEST });
 
-    const { data } = await axios.get(`${BackendUrl}/auctions`);
+    const { data } = await axios.get(`${BackendUrl}/auctions/`);
 
     dispatch({ type: ALL_AUCTIONS_SUCCESS, payload: data.auctions });
   } catch (error) {
@@ -98,7 +98,7 @@ export const getAuctionDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: AUCTION_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`${BackendUrl}/auction/${id}`);
+    const { data } = await axios.get(`${BackendUrl}/auction/${id}/`);
 
     dispatch({ type: AUCTION_DETAILS_SUCCESS, payload: data.auction });
   } catch (error) {
