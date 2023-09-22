@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import logo from "../assets/logo.jpg";
 
 import { options } from ".././alert/Alert";
 import { toast } from "react-toastify";
@@ -18,7 +19,7 @@ const Navbar = () => {
           <div className="flex items-center justify-between border-b border-gray-200 :border-gray-700 py-4">
             <Link to="/">
               <div>
-                <h1 className="text-xl font-bold uppercase">Fotheby's</h1>
+                <img src={logo} />
               </div>
             </Link>
             <div className="hidden md:block">
