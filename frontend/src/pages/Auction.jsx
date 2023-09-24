@@ -35,10 +35,10 @@ const Auction = () => {
   };
 
   useEffect(() => {
-    if (auction_id) {
+    if (!loadingBid) {
       dispatch(getAuctionDetails(auction_id));
     }
-  }, [dispatch, auction_id]);
+  }, [dispatch, auction_id, loadingBid]);
 
   useEffect(() => {
     if (auction) {
